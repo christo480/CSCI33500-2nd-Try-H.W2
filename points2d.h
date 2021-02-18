@@ -85,9 +85,9 @@ class Points2D {
   Points2D(const std::array<Object, 2>& item) {
     //std::cout<< "\n One parameter constructor"<< std::endl;
     
-    // ?_? sequence_= new std::array<Object,2>[0]; Creates unecessary array
+    sequence_= new std::array<Object,2>[0];
     //std::cout<< " Copy"<< std::endl;
-    sequence_=item;
+    sequence_[0]=item;
     size_=item.size();
     // Provide code.
   }
@@ -151,8 +151,8 @@ class Points2D {
     sum[i][0] =c1.sequence_[i][0]+c2.sequence_[i][0];
     sum[i][1] =c1.sequence_[i][1]+c2.sequence_[i][1];
   }
-  Points2D sum_seq = Points2D(*sum);  
-  return sum_seq;// Code missing.
+  //Points2D sum_seq{sum};  
+  // return sum_seq;// Code missing.
  }
 
  // Overloading the << operator.

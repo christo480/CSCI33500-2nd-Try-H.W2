@@ -69,6 +69,6 @@ void TestPart2() {
 int
 main(int argc, char **argv) {
   TestPart1();
-  TestPart2();
+  //TestPart2();
   return 0;
 }
