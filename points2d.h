@@ -76,7 +76,8 @@ class Points2D {
   }
   ~Points2D() 
   {
-    delete sequence_;
+    //delete sequence_;
+    // std::array automatically frees it memory
   }
 
   // End of big-five.
@@ -111,9 +112,12 @@ class Points2D {
     Object token;
     for (int i = 0 ;input_stream >> token; ++i) 
     {
-      sequence_[i][0]=token;// Read coordinates.
+      //std::cout<<"( Row:"<< i <<")"<<std::endl;
+      //std::cout<<"\n("<< sequence_[i][0] <<","<< sequence_[i][1] <<")";
+      sequence_[i][0]=token;// Read coordinates (x).
       input_stream >> token;
-      sequence_[i][1]=token;
+      sequence_[i][1]=token;// Read coordinates (y).
+      std::cout<<"\n("<< sequence_[i][0] <<","<< sequence_[i][1] <<")";
       // Fill sequence_ here.
     }
     
@@ -151,8 +155,8 @@ class Points2D {
     sum[i][0] =c1.sequence_[i][0]+c2.sequence_[i][0];
     sum[i][1] =c1.sequence_[i][1]+c2.sequence_[i][1];
   }
-  //Points2D sum_seq{sum};  
-  // return sum_seq;// Code missing.
+  Points2D sum_seq{*sum};  
+  return sum_seq;// Code missing.
  }
 
  // Overloading the << operator.
