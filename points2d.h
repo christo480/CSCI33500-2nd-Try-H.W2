@@ -117,7 +117,7 @@ class Points2D {
       sequence_[i][0]=token;// Read coordinates (x).
       input_stream >> token;
       sequence_[i][1]=token;// Read coordinates (y).
-      std::cout<<"\n("<< sequence_[i][0] <<","<< sequence_[i][1] <<")";
+      //std::cout<<"\n("<< sequence_[i][0] <<","<< sequence_[i][1] <<")";
       // Fill sequence_ here.
     }
     
