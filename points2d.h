@@ -13,23 +13,32 @@
 
 namespace teaching_project {
 // Place comments that provide a brief explanation of this class and its sample usage:
-// Manages arrays of 2d points implemented as 2d arrays
+//!  Points2D. Manages an array of 2D points.
+/*! Manages arrays of 2d points implemented as 2d arrays. */
 template<typename Object>
 class Points2D {
  public:
-  // Default "big five" -- you have to alter them for your assignment.
-  // That means that you will remove the "= default" statement.
-  //  and you will provide an implementation for it.
+  /// Default "big five" -- you have to alter them for your assignment.
+  /// That means that you will remove the "= default" statement.
+  ///  and you will provide an implementation for it.
 
-  // Zero-parameter constructor. 
-  // Set size to 0.
+  //! Zero-parameter constructor. 
+  /*! 
+    Set size to 0.
+    @returns Points2D 
+  */
   Points2D(): size_(0), sequence_{new std::array<Object,2>[0]}
   {
     
     //std::cout<< "Zero parameter constructor"<< std::endl;
   }
 
-  // Copy-constructor.
+  //! Copy-constructor.
+  /*!
+   \param rhs Point2d object 
+    Sets size to size of array initializer list. Sets sequence_ to initializer list
+   @returns Points2D&
+  */
   Points2D(const Points2D &rhs)
   {
     //std::cout<< "Copy constructor"<< std::endl;
@@ -52,6 +61,13 @@ class Points2D {
   // std::swap(*this, copy);
   // return *this;
   // }
+  
+  //! operator=() overload
+  /*!
+    \sa operator=()
+    \param &rhs
+    Swaps rhs with object instance to copy over data. 
+  */
   Points2D& operator=(const Points2D &rhs)
   {
      
@@ -61,7 +77,13 @@ class Points2D {
 
   }
 
-  // Move-constructor. 
+  // Move-constructor.
+  //! Move-constructor.
+  /*!
+    Move-constructor.
+    \param &rhs
+    Sets all class variables to that of rhs 
+  */ 
   Points2D(Points2D &&rhs)
   {
     sequence_= std::move(rhs.sequence_);
@@ -69,11 +91,21 @@ class Points2D {
   }
 
   // Move-assignment.
-  // Just use std::swap() for all variables.
+  // Just use std::swap() for all variables..
+  //! Move-assignment
+  /*!
+    \param &rhs
+    Sets all class variables to that of rhs
+    @returns Points2D&
+  */
   Points2D& operator=(Points2D &&rhs) {
     std::swap(this->sequence_,rhs.sequence_);
     std::swap(this->size_,rhs.size_);
   }
+  //! Points2D destructor
+  /*!
+    deletes all class members. sequence_ doesn't need to be deleted due to std::array handling its destruction 
+  */
   ~Points2D() 
   {
     //delete sequence_;
@@ -82,18 +114,31 @@ class Points2D {
 
   // End of big-five.
 
-  // One parameter constructor.
+  //! Points2D(const std::array<Object, 2>& item)
+  /*!
+    /param std::array<Object, 2>& item
+    
+  */
   Points2D(const std::array<Object, 2>& item) {
     //std::cout<< "\n One parameter constructor"<< std::endl;
     
-    sequence_= new std::array<Object,2>[0];
     //std::cout<< " Copy"<< std::endl;
-    sequence_[0]=item;
+    // sequence_[0]=item; // Works for now...
     size_=item.size();
+    sequence_= new std::array<Object,2>[size_];
+    for(int i =0;i<size_;i++)
+    {
+      sequence_[i][0] = item[i][0];
+      sequence_[i][1] = item[i][1];
+    }
     // Provide code.
   }
 
-  // Read a chain from standard input.
+  //! ReadPoints2D()
+  /*!
+    Read a chain from standard input.
+    
+  */
   void ReadPoints2D() {
     // Part of code included (without error checking).
     std::string input_line;
@@ -122,11 +167,14 @@ class Points2D {
     }
     
   }
-
+  //! size()
+  /*!
+    returns size of sequence_    
+  */
   size_t size() const {
     return this->size_;// Code missing.
   }
-
+  //! operator[]
   // @location: an index to a location in the given sequence.
   // @returns the point at @location.
   // const version.
@@ -175,9 +223,9 @@ class Points2D {
  
  private:
   // Sequence of points. 
-  std::array<Object, 2> *sequence_;
+  std::array<Object, 2> *sequence_;/**< Pointer to std::array<objects,2> */
   // Size of the sequence.
-  size_t size_;
+  size_t size_;/**< Size of 2d points array */
 
 };
 
