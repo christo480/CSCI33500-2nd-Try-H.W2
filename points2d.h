@@ -128,8 +128,8 @@ class Points2D {
     sequence_= new std::array<Object,2>[size_];
     for(int i =0;i<size_;i++)
     {
-      sequence_[i][0] = item[i][0];
-      sequence_[i][1] = item[i][1];
+      sequence_[i][0] = item[0];
+      sequence_[i][1] = item[1];
     }
     // Provide code.
   }
