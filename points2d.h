@@ -159,8 +159,10 @@ class Points2D {
     {
       //std::cout<<"( Row:"<< i <<")"<<std::endl;
       //std::cout<<"\n("<< sequence_[i][0] <<","<< sequence_[i][1] <<")";
+      std::cout<< token << "->" << "["<<i<<"]"<<"[0]"<<std::endl;
       sequence_[i][0]=token;// Read coordinates (x).
       input_stream >> token;
+      std::cout<< token << "->" << "["<<i<<"]"<<"[1]"<<std::endl;
       sequence_[i][1]=token;// Read coordinates (y).
       //std::cout<<"\n("<< sequence_[i][0] <<","<< sequence_[i][1] <<")";
       // Fill sequence_ here.
@@ -190,18 +192,66 @@ class Points2D {
  friend Points2D operator+(const Points2D &c1, const Points2D &c2) {
   
   
-
-  int min_size;// smaller of two sizes 
+  int max_size;
+  int min_size;// smaller of two sizes
+   
   if(c1.size_<c2.size_)
+  {  
     min_size= c1.size_;
+    auto smaller= c1;
+    max_size= c2.size_;
+    auto larger= c2;
+    std::array<Object,2> *sum = new std::array<Object,2>[min_size];
+
+    for(int i =0;i<min_size;i++)
+    {
+      
+      sum[i][0] =c1.sequence_[i][0]+c2.sequence_[i][0];
+      sum[i][1] =c1.sequence_[i][1]+c2.sequence_[i][1];
+    }
+    for(int i =min_size;i<max_size;i++)
+    {
+      sum[i][0]= larger[i][0];
+      sum[i][1]= larger[i][1];
+    }
+    Points2D sum_seq{*sum};  
+    return sum_seq;// Code missing.
+  }
+  }
   else
+  {
     min_size= c2.size_;
+    auto smaller= c2;
+    max_size= c1.size_;
+    auto larger= c1;
+    
+    std::array<Object,2> *sum = new std::array<Object,2>[min_size];
+    for(int i =0;i<min_size;i++)
+    {
+      
+      sum[i][0] =c1.sequence_[i][0]+c2.sequence_[i][0];
+      sum[i][1] =c1.sequence_[i][1]+c2.sequence_[i][1];
+    }
+    for(int i =min_size;i<max_size;i++)
+    {
+      sum[i][0]= larger[i][0];
+      sum[i][1]= larger[i][1];
+    }
+    Points2D sum_seq{*sum};  
+    return sum_seq;// Code missing.
+  }
+  }
   std::array<Object,2> *sum = new std::array<Object,2>[min_size];
   for(int i =0;i<min_size;i++)
   {
     
     sum[i][0] =c1.sequence_[i][0]+c2.sequence_[i][0];
     sum[i][1] =c1.sequence_[i][1]+c2.sequence_[i][1];
+  }
+  for(int i =min_size;i<max_size;i++)
+  {
+    sum[i][0]= larger[i][0];
+    sum[i][1]= larger[i][1];
   }
   Points2D sum_seq{*sum};  
   return sum_seq;// Code missing.
